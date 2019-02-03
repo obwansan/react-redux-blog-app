@@ -11,7 +11,10 @@ import jsonPlaceholder from '../apis/jsonPlaceholder';
 // and dispatches an action (object) containing the get response.
 export const fetchPosts = () => async dispatch => {
     const response = await jsonPlaceholder.get('/posts');
-    dispatch({ type: 'FETCH_POSTS', payload: response });
+    // We only want to return the data property on the response object.
+    // You can see the whole response object by rendering 
+    // console.log(this.props.posts); in PostList.
+    dispatch({ type: 'FETCH_POSTS', payload: response.data });
   };
 
 // This is the ES5 version 
