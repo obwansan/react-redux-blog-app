@@ -4,7 +4,7 @@ import postsReducer from './postsReducer';
 // combineReducers() somehow creates the redux state object 
 // (the 'store') whose properties are the keys in the object 
 // passed to combineReducers(). Those properties contain the 
-// data (bits of state) returned by the assigned value/name 
+// data (bits of state) returned by the assigned reducer function. 
 // e.g. the posts property holds the data returned by 
 // the postsReducer reducer.
 // So, state.posts in mapStateToProps() is accessing this posts
@@ -12,3 +12,9 @@ import postsReducer from './postsReducer';
 export default combineReducers({
   posts: postsReducer
 });
+
+// What the combineReducers fucntion does:
+// "Turns an object whose values are different reducer functions, 
+// into a single reducer function. It will call every child reducer, 
+// and gather their results into a single state object, whose keys 
+// correspond to the keys of the passed reducer functions.""
