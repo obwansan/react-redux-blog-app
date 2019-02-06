@@ -12,9 +12,7 @@ class UserHeader extends React.Component {
   }
 
   render() {
-    // this.props.users is an array of user objects. find() is a JS array function
-    // that loops over the array and returns the first element that meets the condition.
-    const user = this.props.users.find(user => user.id === this.props.userId);
+    const {user} = this.props;
 
     if (!user) {
       return null;
@@ -24,8 +22,8 @@ class UserHeader extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {users: state.users};
+const mapStateToProps = (state, ownProps) => {
+  return {user: state.users.find(user => user.id === ownProps.userId)};
 }
 
 export default connect(mapStateToProps, {fetchUser: fetchUser})(UserHeader);
