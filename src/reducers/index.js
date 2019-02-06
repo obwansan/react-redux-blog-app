@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import postsReducer from './postsReducer';
+import usersReducer from './usersReducer';
 
 // combineReducers() somehow creates the redux state object 
 // (the 'store') whose properties are the keys in the object 
@@ -10,7 +11,8 @@ import postsReducer from './postsReducer';
 // So, state.posts in mapStateToProps() is accessing this posts
 // property.
 export default combineReducers({
-  posts: postsReducer
+  posts: postsReducer,
+  users: usersReducer
 });
 
 // What the combineReducers fucntion does:

@@ -12,8 +12,20 @@ class UserHeader extends React.Component {
   }
 
   render() {
-    return <div>User Header</div>;
+    // this.props.users is an array of user objects. find() is a JS array function
+    // that loops over the array and returns the first element that meets the condition.
+    const user = this.props.users.find(user => user.id === this.props.userId);
+
+    if (!user) {
+      return null;
+    }
+
+    return <div className="header">{user.name}</div>;
   }
 }
 
-export default connect(null, {fetchUser: fetchUser})(UserHeader);
+const mapStateToProps = (state) => {
+  return {users: state.users};
+}
+
+export default connect(mapStateToProps, {fetchUser: fetchUser})(UserHeader);
