@@ -25,7 +25,8 @@ export const fetchUser = id => dispatch => _fetchuser(id, dispatch);
       return function(dispatch) {
         _fetchuser(id, dispatch)
       }
-*/ }
+ }
+ */
 
 // The underscore indicates a 'private' function that another developer
 // shouldn't use unless they know what they're doing.
