@@ -1,11 +1,22 @@
 import _ from 'lodash';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
+export const fetchPostsAndUsers = () => async dispatch => {
+  console.log('About to fetch posts');
+  await dispatch(fetchPosts());
+  console.log('fetched posts!');
+}
+
 // How do action creators have access to the redux dispatch function? 
 // Why don't you need to import it like you do connect() from react-redux?
 export const fetchPosts = () => async dispatch => {
   const response = await jsonPlaceholder.get('/posts');
   dispatch({ type: 'FETCH_POSTS', payload: response.data });
+};
+
+export const fetchUser = id => async dispatch => {
+  const response = await jsonPlaceholder.get(`/users/${id}`);
+  dispatch({ type: 'FETCH_USER', payload: response.data });
 };
 
 /*
@@ -18,7 +29,8 @@ export const fetchUser = (id) => dispatch => {
 // ES6 refactoring: We have a function (fetchUser) that RETURNS an anonymous function
 // (dispatch =>) that CALLS the function _fetchuser. Remember the return keyword isn't 
 // used in ES6.
-export const fetchUser = id => dispatch => _fetchuser(id, dispatch);
+
+// export const fetchUser = id => dispatch => _fetchuser(id, dispatch);
 
 /* ES5 version:
    function fetchUser(id) {
@@ -33,7 +45,8 @@ export const fetchUser = id => dispatch => _fetchuser(id, dispatch);
 // memoizing the function means it will only make one network request.
 // If it's called again it will return (dispatch) the same data it got 
 // the first time it was called.
-const _fetchuser = _.memoize(async (id, dispatch) => {
-  const response = await jsonPlaceholder.get(`/users/${id}`);
-  dispatch({ type: 'FETCH_USER', payload: response.data });
-});
+
+// const _fetchuser = _.memoize(async (id, dispatch) => {
+//   const response = await jsonPlaceholder.get(`/users/${id}`);
+//   dispatch({ type: 'FETCH_USER', payload: response.data });
+// });
