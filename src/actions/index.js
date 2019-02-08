@@ -1,10 +1,16 @@
 import _ from 'lodash';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
-export const fetchPostsAndUsers = () => async dispatch => {
-  console.log('About to fetch posts');
+// Seems that getState doesn't need to be imported into file
+export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   await dispatch(fetchPosts());
-  console.log('fetched posts!');
+  // Loop over the posts array (objects) and return an array of unique (i.e. no duplicate)
+  // user IDs (using lodash functions)
+  const userIds = _.uniq(_.map(getState().posts, 'userId'));
+  // Loop over the IDs, call the appropriate action creator on it, and dispatch it.
+  // Dispatching it means redux-thunk (middleware) will get the user object, based on the ID
+  // and dispatch the action. (Only doing it once for each unique ID)
+  userIds.forEach(id => dispatch(fetchUser(id)));
 }
 
 // How do action creators have access to the redux dispatch function? 
