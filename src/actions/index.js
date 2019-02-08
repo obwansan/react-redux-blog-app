@@ -11,6 +11,19 @@ export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   // Dispatching it means redux-thunk (middleware) will get the user object, based on the ID
   // and dispatch the action. (Only doing it once for each unique ID)
   userIds.forEach(id => dispatch(fetchUser(id)));
+
+  //Optional lodash _.chain refactoring
+  // What getState().posts returns is passed as the first argument to .map
+  // userId is passed as the second argument. 
+  // What .map('userId') returns is passed as the first argument to .uniq()
+  // What .uniq() returns is passed as the first argument to .forEach
+  /*
+  _.chain(getState().posts)
+    .map('userId')
+    .uniq()
+    .forEach(id => dispatch(fetchUser(id)))
+    .value()
+    */
 }
 
 // How do action creators have access to the redux dispatch function? 
