@@ -1,3 +1,10 @@
+## How to set up the app
+* Clone the repo.
+* Check you've got node and npm installed.
+* Run `npm install` to get the required packages.
+* Run `npm start` to run the app in development mode.
+* Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
